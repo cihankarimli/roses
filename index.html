@@ -1,0 +1,1608 @@
+<!doctype html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khadicike 🌸</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: radial-gradient(
+          ellipse at 50% 30%,
+          #2a0a1e 0%,
+          #0e0008 100%
+        );
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        font-family: "Dancing Script", cursive;
+      }
+      .star {
+        position: fixed;
+        background: #fff;
+        border-radius: 50%;
+        animation: twinkle var(--d) var(--dl) infinite ease-in-out;
+        opacity: 0;
+        pointer-events: none;
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.85;
+        }
+      }
+
+      /* ── INTRO ── */
+      #intro {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        pointer-events: none;
+      }
+      .il {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.9s ease,
+          transform 0.9s ease;
+        text-align: center;
+        padding: 0 20px;
+      }
+      .il.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .il1 {
+        font-size: clamp(1.3rem, 4.5vw, 2.6rem);
+        font-weight: 400;
+        color: #f9d0e8;
+        letter-spacing: 3px;
+        text-shadow:
+          0 0 28px rgba(255, 120, 180, 0.7),
+          0 0 55px rgba(200, 0, 100, 0.3);
+      }
+      .il2 {
+        font-size: clamp(2rem, 7vw, 4.2rem);
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          #fde0ec 0%,
+          #ff80c0 35%,
+          #f7c948 65%,
+          #fde0ec 100%
+        );
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s linear infinite;
+        letter-spacing: 4px;
+        margin-top: 6px;
+        filter: drop-shadow(0 0 20px rgba(255, 100, 180, 0.95));
+      }
+      .il3 {
+        font-size: clamp(1rem, 3.2vw, 1.7rem);
+        color: rgba(255, 200, 230, 0.65);
+        letter-spacing: 5px;
+        margin-top: 5px;
+      }
+      .cookie-anim {
+        font-size: clamp(2rem, 7vw, 3.8rem);
+        display: inline-block;
+        animation: cb 1.2s ease-in-out infinite;
+        filter: drop-shadow(0 0 12px rgba(247, 201, 72, 0.85));
+      }
+      @keyframes cb {
+        0%,
+        100% {
+          transform: scale(1) rotate(-5deg);
+        }
+        50% {
+          transform: scale(1.18) rotate(5deg);
+        }
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: 0%;
+        }
+        100% {
+          background-position: 200%;
+        }
+      }
+      #intro.fadeout {
+        animation: iOut 0.8s ease forwards;
+      }
+      @keyframes iOut {
+        0% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(1.05);
+        }
+      }
+
+      /* ── SCENE ── */
+      #scene {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(6px, 2vw, 18px);
+        padding: 14px;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 1s;
+      }
+      #scene.show {
+        opacity: 1;
+      }
+      .bwrap {
+        width: min(400px, 94vw);
+        aspect-ratio: 3/4;
+        position: relative;
+      }
+      .bwrap svg {
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        filter: drop-shadow(0 6px 28px rgba(200, 20, 100, 0.6))
+          drop-shadow(0 0 70px rgba(160, 0, 70, 0.3));
+      }
+
+      /* ── ANIMATIONS ── */
+      .pg {
+        opacity: 0;
+        transform: scale(0) translateY(18px);
+        transition:
+          opacity 1s,
+          transform 1s cubic-bezier(0.15, 1.65, 0.45, 1);
+      }
+      .pg.open {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+
+      .sp {
+        stroke-dasharray: 340;
+        stroke-dashoffset: 340;
+        transition: stroke-dashoffset 1.2s 0.05s ease-out;
+      }
+      .sp.grow {
+        stroke-dashoffset: 0;
+      }
+
+      .lf {
+        opacity: 0;
+        transform-origin: 50% 90%;
+        transform: scale(0);
+        transition:
+          opacity 0.75s,
+          transform 0.75s cubic-bezier(0.15, 1.65, 0.45, 1);
+      }
+      .lf.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .rb {
+        opacity: 0;
+        transform: scale(0);
+        transform-origin: 50% 70%;
+        transition:
+          opacity 0.55s,
+          transform 0.6s cubic-bezier(0.15, 1.65, 0.45, 1);
+      }
+      .rb.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .kw {
+        opacity: 0;
+        transform: scale(0);
+        transform-origin: 50% 92%;
+        transition:
+          opacity 0.65s,
+          transform 0.65s cubic-bezier(0.2, 1.4, 0.45, 1);
+      }
+      .kw.show {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* ── SCROLL TEXT ── */
+      .tt {
+        width: min(400px, 96vw);
+        overflow: hidden;
+        position: relative;
+        padding: 5px 0;
+        opacity: 0;
+        transform: translateY(14px);
+        transition:
+          opacity 0.9s,
+          transform 0.9s;
+      }
+      .tt.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .tt::before,
+      .tt::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 55px;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .tt::before {
+        left: 0;
+        background: linear-gradient(to right, #0e0008, transparent);
+      }
+      .tt::after {
+        right: 0;
+        background: linear-gradient(to left, #0e0008, transparent);
+      }
+      .trow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        white-space: nowrap;
+        animation: sc 8s linear infinite;
+      }
+      .nm {
+        font-size: clamp(1.4rem, 5vw, 2.2rem);
+        font-weight: 700;
+        background: linear-gradient(120deg, #fde0ec, #ff80c0, #f7c948, #fde0ec);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shimmer 3s linear infinite;
+        letter-spacing: 2px;
+        filter: drop-shadow(0 0 10px rgba(255, 80, 160, 0.7));
+      }
+      .ic {
+        font-size: clamp(1rem, 3vw, 1.4rem);
+        animation: sw 2s ease-in-out infinite;
+        display: inline-block;
+      }
+      @keyframes sw {
+        0%,
+        100% {
+          transform: rotate(-10deg);
+        }
+        50% {
+          transform: rotate(10deg);
+        }
+      }
+      @keyframes sc {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .fp {
+        position: fixed;
+        pointer-events: none;
+        animation: fall linear forwards;
+        opacity: 0;
+      }
+      @keyframes fall {
+        0% {
+          opacity: 1;
+          transform: translateY(0) rotate(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(110vh) rotate(560deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="intro">
+      <div class="il il1" id="il1">Ballı kurabiyəsindən</div>
+      <div class="il il2" id="il2">Khadicike</div>
+      <div class="il" id="il4" style="margin-top: 20px"></div>
+    </div>
+
+    <div id="scene">
+      <div class="bwrap">
+        <svg viewBox="0 0 300 430" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- ═══ PETAL GRADIENTS — layered for real depth ═══ -->
+            <!-- Outer petals: bright hot pink with deep edge -->
+            <radialGradient id="p_out" cx="42%" cy="28%" r="72%">
+              <stop offset="0%" stop-color="#ffe8f4" />
+              <stop offset="18%" stop-color="#f96aaa" />
+              <stop offset="50%" stop-color="#d42070" />
+              <stop offset="82%" stop-color="#a00050" />
+              <stop offset="100%" stop-color="#700030" />
+            </radialGradient>
+            <!-- Outer petals alt -->
+            <radialGradient id="p_out2" cx="58%" cy="28%" r="72%">
+              <stop offset="0%" stop-color="#ffdcf0" />
+              <stop offset="20%" stop-color="#ee5898" />
+              <stop offset="55%" stop-color="#c01860" />
+              <stop offset="100%" stop-color="#780038" />
+            </radialGradient>
+            <!-- Mid petals: richer magenta -->
+            <radialGradient id="p_mid" cx="50%" cy="25%" r="68%">
+              <stop offset="0%" stop-color="#ffd0e8" />
+              <stop offset="25%" stop-color="#e84890" />
+              <stop offset="60%" stop-color="#bb1060" />
+              <stop offset="100%" stop-color="#800040" />
+            </radialGradient>
+            <!-- Inner petals: very deep, almost crimson -->
+            <radialGradient id="p_inn" cx="50%" cy="35%" r="65%">
+              <stop offset="0%" stop-color="#ffc0dc" />
+              <stop offset="30%" stop-color="#d83078" />
+              <stop offset="65%" stop-color="#980050" />
+              <stop offset="100%" stop-color="#600030" />
+            </radialGradient>
+            <!-- Petal highlight overlay -->
+            <linearGradient id="p_hi" x1="20%" y1="0%" x2="80%" y2="100%">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.35)" />
+              <stop offset="40%" stop-color="rgba(255,255,255,0.08)" />
+              <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+            </linearGradient>
+            <!-- Petal shadow underlay -->
+            <radialGradient id="p_shad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(80,0,30,0)" />
+              <stop offset="70%" stop-color="rgba(80,0,30,0.18)" />
+              <stop offset="100%" stop-color="rgba(50,0,20,0.45)" />
+            </radialGradient>
+
+            <!-- Stamen -->
+            <radialGradient id="stam" cx="50%" cy="35%" r="60%">
+              <stop offset="0%" stop-color="#fffde0" />
+              <stop offset="55%" stop-color="#f7c840" />
+              <stop offset="100%" stop-color="#c88000" />
+            </radialGradient>
+            <!-- Center disk -->
+            <radialGradient id="cdisk" cx="40%" cy="35%" r="65%">
+              <stop offset="0%" stop-color="#fff5e8" />
+              <stop offset="40%" stop-color="#fce0f0" />
+              <stop offset="80%" stop-color="#f0a0c0" />
+              <stop offset="100%" stop-color="#d06090" />
+            </radialGradient>
+
+            <!-- Leaf -->
+            <linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#5aa830" />
+              <stop offset="45%" stop-color="#2e7018" />
+              <stop offset="100%" stop-color="#1a4a0c" />
+            </linearGradient>
+            <linearGradient id="lgr" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#5aaa30" />
+              <stop offset="45%" stop-color="#2e7018" />
+              <stop offset="100%" stop-color="#1a4a0c" />
+            </linearGradient>
+
+            <!-- Kraft paper -->
+            <linearGradient id="kp" x1="0%" y1="0%" x2="100%" y2="110%">
+              <stop offset="0%" stop-color="#d4943a" />
+              <stop offset="35%" stop-color="#a86c28" />
+              <stop offset="100%" stop-color="#7a4c18" />
+            </linearGradient>
+            <linearGradient id="kp2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#c08030" />
+              <stop offset="100%" stop-color="#8a5220" />
+            </linearGradient>
+
+            <!-- Ribbon -->
+            <linearGradient id="rib" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#e8aa20" />
+              <stop offset="50%" stop-color="#ffe458" />
+              <stop offset="100%" stop-color="#e8aa20" />
+            </linearGradient>
+
+            <!-- Filters -->
+            <filter id="sg" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="2.5" result="b" />
+              <feMerge>
+                <feMergeNode in="b" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <filter id="ds" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow
+                dx="1"
+                dy="2"
+                stdDeviation="2"
+                flood-color="rgba(100,0,40,0.4)"
+              />
+            </filter>
+            <filter id="dsleaf">
+              <feDropShadow
+                dx="1"
+                dy="1"
+                stdDeviation="1.5"
+                flood-color="rgba(0,40,0,0.35)"
+              />
+            </filter>
+            <filter id="glow2">
+              <feGaussianBlur stdDeviation="4" result="b" />
+              <feMerge>
+                <feMergeNode in="b" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <!-- ══ KRAFT WRAP ══ -->
+          <g class="kw" id="kw">
+            <path
+              d="M88 418 C78 386 68 354 73 320 C88 298 212 298 227 320 C232 354 222 386 212 418 Z"
+              fill="url(#kp)"
+              opacity=".93"
+            />
+            <path
+              d="M88 385 C68 364 52 340 48 308 C58 292 90 298 102 320 C97 348 93 368 88 385 Z"
+              fill="url(#kp2)"
+              opacity=".88"
+            />
+            <path
+              d="M212 385 C232 364 248 340 252 308 C242 292 210 298 198 320 C203 348 208 368 212 385 Z"
+              fill="url(#kp)"
+              opacity=".88"
+            />
+            <path
+              d="M73 320 C62 306 55 292 60 278 C70 273 84 286 88 303 C84 311 79 316 73 320 Z"
+              fill="url(#kp2)"
+              opacity=".82"
+            />
+            <path
+              d="M227 320 C238 306 245 292 240 278 C230 273 216 286 212 303 C216 311 222 316 227 320 Z"
+              fill="url(#kp)"
+              opacity=".82"
+            />
+            <!-- texture folds -->
+            <line
+              x1="100"
+              y1="312"
+              x2="94"
+              y2="415"
+              stroke="rgba(0,0,0,.07)"
+              stroke-width="1.5"
+            />
+            <line
+              x1="128"
+              y1="306"
+              x2="126"
+              y2="418"
+              stroke="rgba(0,0,0,.05)"
+              stroke-width="1"
+            />
+            <line
+              x1="158"
+              y1="304"
+              x2="158"
+              y2="418"
+              stroke="rgba(0,0,0,.05)"
+              stroke-width="1"
+            />
+            <line
+              x1="188"
+              y1="306"
+              x2="190"
+              y2="418"
+              stroke="rgba(0,0,0,.05)"
+              stroke-width="1"
+            />
+            <line
+              x1="200"
+              y1="312"
+              x2="206"
+              y2="415"
+              stroke="rgba(0,0,0,.07)"
+              stroke-width="1.5"
+            />
+            <!-- highlight -->
+            <path
+              d="M98 385 C93 356 91 328 97 308 C108 302 127 300 132 310 C122 332 113 362 110 388 Z"
+              fill="rgba(255,210,160,.14)"
+            />
+            <path
+              d="M202 385 C207 356 209 328 203 308 C192 302 173 300 168 310 C178 332 187 362 190 388 Z"
+              fill="rgba(255,210,160,.09)"
+            />
+          </g>
+
+          <!-- ══ STEMS ══ -->
+          <path
+            class="sp"
+            id="s0"
+            d="M150 408 C150 376 150 346 150 296"
+            stroke="#347222"
+            stroke-width="5.5"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            class="sp"
+            id="s1"
+            d="M148 396 C137 362 116 328 96 270"
+            stroke="#347222"
+            stroke-width="4.5"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            class="sp"
+            id="s2"
+            d="M152 396 C163 362 184 328 204 270"
+            stroke="#347222"
+            stroke-width="4.5"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            class="sp"
+            id="s3"
+            d="M147 400 C129 364 106 330 72 280"
+            stroke="#347222"
+            stroke-width="4"
+            fill="none"
+            stroke-linecap="round"
+          />
+          <path
+            class="sp"
+            id="s4"
+            d="M153 400 C171 364 194 330 228 280"
+            stroke="#347222"
+            stroke-width="4"
+            fill="none"
+            stroke-linecap="round"
+          />
+
+          <!-- ══ LEAVES — realistic bezier shapes ══ -->
+          <g class="lf" id="ll1" filter="url(#dsleaf)">
+            <path
+              d="M130 338 C122 328 104 326 88 316 C86 308 94 300 110 304 C122 308 130 322 132 334 Z"
+              fill="url(#lg)"
+              stroke="#1c4e0e"
+              stroke-width=".8"
+            />
+            <line
+              x1="90"
+              y1="315"
+              x2="131"
+              y2="336"
+              stroke="rgba(255,255,255,.18)"
+              stroke-width=".9"
+              stroke-linecap="round"
+            />
+            <path
+              d="M105 320 C112 322 120 326 128 332"
+              stroke="rgba(255,255,255,.1)"
+              stroke-width=".7"
+              fill="none"
+            />
+          </g>
+          <g class="lf" id="ll2" filter="url(#dsleaf)">
+            <path
+              d="M170 338 C178 328 196 326 212 316 C214 308 206 300 190 304 C178 308 170 322 168 334 Z"
+              fill="url(#lgr)"
+              stroke="#1c4e0e"
+              stroke-width=".8"
+            />
+            <line
+              x1="210"
+              y1="315"
+              x2="169"
+              y2="336"
+              stroke="rgba(255,255,255,.18)"
+              stroke-width=".9"
+              stroke-linecap="round"
+            />
+          </g>
+          <g class="lf" id="ll3" filter="url(#dsleaf)">
+            <path
+              d="M114 308 C96 295 88 274 74 266 C71 279 88 296 108 306 Z"
+              fill="url(#lg)"
+              stroke="#1c4e0e"
+              stroke-width=".8"
+            />
+            <line
+              x1="76"
+              y1="268"
+              x2="112"
+              y2="307"
+              stroke="rgba(255,255,255,.15)"
+              stroke-width=".8"
+              stroke-linecap="round"
+            />
+          </g>
+          <g class="lf" id="ll4" filter="url(#dsleaf)">
+            <path
+              d="M186 308 C204 295 212 274 226 266 C229 279 212 296 192 306 Z"
+              fill="url(#lgr)"
+              stroke="#1c4e0e"
+              stroke-width=".8"
+            />
+            <line
+              x1="224"
+              y1="268"
+              x2="188"
+              y2="307"
+              stroke="rgba(255,255,255,.15)"
+              stroke-width=".8"
+              stroke-linecap="round"
+            />
+          </g>
+
+          <!-- ═══════════════════════════════════════════
+         REALISTIC PEONY FLOWERS
+         Each flower uses proper teardrop/fan petal
+         paths with highlight, vein, and shadow layers
+    ═══════════════════════════════════════════ -->
+
+          <!-- helper macro: realistic single petal (teardrop bezier) centered at 0,0 pointing up -->
+          <!-- We'll define petals inline using <path> bezier curves -->
+
+          <!-- ╔══════════════════════════════╗
+         ║  FLOWER: FAR LEFT  cx=72 cy=250 ║
+         ╚══════════════════════════════╝ -->
+          <g class="pg" id="ffl" style="transform-origin: 72px 250px">
+            <!-- OUTER PETALS — 6, wide teardrop paths, rotated around center -->
+            <g filter="url(#ds)">
+              <!-- petal template: bezier teardrop, tip at top, base at center -->
+              <!-- rot 0° -->
+              <path
+                d="M72 250 C66 242 60 228 62 212 C64 200 72 194 80 200 C88 206 88 224 82 240 Z"
+                fill="url(#p_out)"
+                opacity=".92"
+              />
+              <!-- rot 60° -->
+              <path
+                d="M72 250 C66 242 60 228 62 212 C64 200 72 194 80 200 C88 206 88 224 82 240 Z"
+                fill="url(#p_out2)"
+                opacity=".88"
+                transform="rotate(60 72 250)"
+              />
+              <!-- rot 120° -->
+              <path
+                d="M72 250 C66 242 60 228 62 212 C64 200 72 194 80 200 C88 206 88 224 82 240 Z"
+                fill="url(#p_out)"
+                opacity=".86"
+                transform="rotate(120 72 250)"
+              />
+              <!-- rot 180° -->
+              <path
+                d="M72 250 C66 242 60 228 62 212 C64 200 72 194 80 200 C88 206 88 224 82 240 Z"
+                fill="url(#p_out2)"
+                opacity=".88"
+                transform="rotate(180 72 250)"
+              />
+              <!-- rot 240° -->
+              <path
+                d="M72 250 C66 242 60 228 62 212 C64 200 72 194 80 200 C88 206 88 224 82 240 Z"
+                fill="url(#p_out)"
+                opacity=".84"
+                transform="rotate(240 72 250)"
+              />
+              <!-- rot 300° -->
+              <path
+                d="M72 250 C66 242 60 228 62 212 C64 200 72 194 80 200 C88 206 88 224 82 240 Z"
+                fill="url(#p_out2)"
+                opacity=".82"
+                transform="rotate(300 72 250)"
+              />
+            </g>
+            <!-- petal highlights -->
+            <path
+              d="M72 250 C68 243 64 232 65 218 C66 208 72 202 77 206 C74 216 72 234 74 248 Z"
+              fill="url(#p_hi)"
+              opacity=".6"
+            />
+            <path
+              d="M72 250 C68 243 64 232 65 218 C66 208 72 202 77 206 C74 216 72 234 74 248 Z"
+              fill="url(#p_hi)"
+              opacity=".5"
+              transform="rotate(120 72 250)"
+            />
+            <path
+              d="M72 250 C68 243 64 232 65 218 C66 208 72 202 77 206 C74 216 72 234 74 248 Z"
+              fill="url(#p_hi)"
+              opacity=".5"
+              transform="rotate(240 72 250)"
+            />
+            <!-- MID PETALS — 6, slightly smaller, rotated 30° offset -->
+            <g filter="url(#ds)">
+              <path
+                d="M72 250 C67 244 63 233 64 220 C66 210 72 205 78 210 C84 215 83 230 79 243 Z"
+                fill="url(#p_mid)"
+                opacity=".93"
+                transform="rotate(30 72 250)"
+              />
+              <path
+                d="M72 250 C67 244 63 233 64 220 C66 210 72 205 78 210 C84 215 83 230 79 243 Z"
+                fill="url(#p_inn)"
+                opacity=".91"
+                transform="rotate(90 72 250)"
+              />
+              <path
+                d="M72 250 C67 244 63 233 64 220 C66 210 72 205 78 210 C84 215 83 230 79 243 Z"
+                fill="url(#p_mid)"
+                opacity=".93"
+                transform="rotate(150 72 250)"
+              />
+              <path
+                d="M72 250 C67 244 63 233 64 220 C66 210 72 205 78 210 C84 215 83 230 79 243 Z"
+                fill="url(#p_inn)"
+                opacity=".91"
+                transform="rotate(210 72 250)"
+              />
+              <path
+                d="M72 250 C67 244 63 233 64 220 C66 210 72 205 78 210 C84 215 83 230 79 243 Z"
+                fill="url(#p_mid)"
+                opacity=".89"
+                transform="rotate(270 72 250)"
+              />
+              <path
+                d="M72 250 C67 244 63 233 64 220 C66 210 72 205 78 210 C84 215 83 230 79 243 Z"
+                fill="url(#p_inn)"
+                opacity=".89"
+                transform="rotate(330 72 250)"
+              />
+            </g>
+            <!-- INNER PETALS — 5 tight -->
+            <path
+              d="M72 250 C69 245 67 238 68 230 C69 223 72 220 76 223 C79 226 79 235 76 244 Z"
+              fill="url(#p_inn)"
+              opacity=".96"
+              transform="rotate(18 72 250)"
+            />
+            <path
+              d="M72 250 C69 245 67 238 68 230 C69 223 72 220 76 223 C79 226 79 235 76 244 Z"
+              fill="url(#p_inn)"
+              opacity=".94"
+              transform="rotate(90 72 250)"
+            />
+            <path
+              d="M72 250 C69 245 67 238 68 230 C69 223 72 220 76 223 C79 226 79 235 76 244 Z"
+              fill="url(#p_inn)"
+              opacity=".96"
+              transform="rotate(162 72 250)"
+            />
+            <path
+              d="M72 250 C69 245 67 238 68 230 C69 223 72 220 76 223 C79 226 79 235 76 244 Z"
+              fill="url(#p_inn)"
+              opacity=".94"
+              transform="rotate(234 72 250)"
+            />
+            <path
+              d="M72 250 C69 245 67 238 68 230 C69 223 72 220 76 223 C79 226 79 235 76 244 Z"
+              fill="url(#p_inn)"
+              opacity=".92"
+              transform="rotate(306 72 250)"
+            />
+            <!-- CENTER -->
+            <circle
+              cx="72"
+              cy="250"
+              r="9.5"
+              fill="url(#cdisk)"
+              stroke="#d06088"
+              stroke-width="1"
+              filter="url(#sg)"
+            />
+            <circle cx="72" cy="243" r="2" fill="url(#stam)" />
+            <circle cx="78" cy="245" r="1.8" fill="url(#stam)" />
+            <circle cx="80" cy="250" r="2" fill="url(#stam)" />
+            <circle cx="78" cy="255" r="1.8" fill="url(#stam)" />
+            <circle cx="72" cy="257" r="2" fill="url(#stam)" />
+            <circle cx="66" cy="255" r="1.8" fill="url(#stam)" />
+            <circle cx="64" cy="250" r="2" fill="url(#stam)" />
+            <circle cx="66" cy="245" r="1.8" fill="url(#stam)" />
+            <circle cx="72" cy="250" r="4" fill="#fff9cc" />
+          </g>
+
+          <!-- ╔══════════════════════════════╗
+         ║  FLOWER: LEFT  cx=100 cy=233 ║
+         ╚══════════════════════════════╝ -->
+          <g class="pg" id="fleft" style="transform-origin: 100px 233px">
+            <g filter="url(#ds)">
+              <path
+                d="M100 233 C93 223 86 206 88 188 C90 174 100 167 110 174 C120 181 119 202 112 220 Z"
+                fill="url(#p_out)"
+                opacity=".92"
+              />
+              <path
+                d="M100 233 C93 223 86 206 88 188 C90 174 100 167 110 174 C120 181 119 202 112 220 Z"
+                fill="url(#p_out2)"
+                opacity=".88"
+                transform="rotate(60 100 233)"
+              />
+              <path
+                d="M100 233 C93 223 86 206 88 188 C90 174 100 167 110 174 C120 181 119 202 112 220 Z"
+                fill="url(#p_out)"
+                opacity=".86"
+                transform="rotate(120 100 233)"
+              />
+              <path
+                d="M100 233 C93 223 86 206 88 188 C90 174 100 167 110 174 C120 181 119 202 112 220 Z"
+                fill="url(#p_out2)"
+                opacity=".88"
+                transform="rotate(180 100 233)"
+              />
+              <path
+                d="M100 233 C93 223 86 206 88 188 C90 174 100 167 110 174 C120 181 119 202 112 220 Z"
+                fill="url(#p_out)"
+                opacity=".84"
+                transform="rotate(240 100 233)"
+              />
+              <path
+                d="M100 233 C93 223 86 206 88 188 C90 174 100 167 110 174 C120 181 119 202 112 220 Z"
+                fill="url(#p_out2)"
+                opacity=".82"
+                transform="rotate(300 100 233)"
+              />
+            </g>
+            <!-- highlights -->
+            <path
+              d="M100 233 C95 224 91 210 92 195 C94 183 100 177 106 182 C102 194 100 214 102 230 Z"
+              fill="url(#p_hi)"
+              opacity=".55"
+            />
+            <path
+              d="M100 233 C95 224 91 210 92 195 C94 183 100 177 106 182 C102 194 100 214 102 230 Z"
+              fill="url(#p_hi)"
+              opacity=".45"
+              transform="rotate(120 100 233)"
+            />
+            <!-- mid -->
+            <g filter="url(#ds)">
+              <path
+                d="M100 233 C94 225 89 212 90 198 C92 186 100 180 107 186 C114 192 113 210 108 224 Z"
+                fill="url(#p_mid)"
+                opacity=".93"
+                transform="rotate(30 100 233)"
+              />
+              <path
+                d="M100 233 C94 225 89 212 90 198 C92 186 100 180 107 186 C114 192 113 210 108 224 Z"
+                fill="url(#p_inn)"
+                opacity=".91"
+                transform="rotate(90 100 233)"
+              />
+              <path
+                d="M100 233 C94 225 89 212 90 198 C92 186 100 180 107 186 C114 192 113 210 108 224 Z"
+                fill="url(#p_mid)"
+                opacity=".93"
+                transform="rotate(150 100 233)"
+              />
+              <path
+                d="M100 233 C94 225 89 212 90 198 C92 186 100 180 107 186 C114 192 113 210 108 224 Z"
+                fill="url(#p_inn)"
+                opacity=".91"
+                transform="rotate(210 100 233)"
+              />
+              <path
+                d="M100 233 C94 225 89 212 90 198 C92 186 100 180 107 186 C114 192 113 210 108 224 Z"
+                fill="url(#p_mid)"
+                opacity=".89"
+                transform="rotate(270 100 233)"
+              />
+              <path
+                d="M100 233 C94 225 89 212 90 198 C92 186 100 180 107 186 C114 192 113 210 108 224 Z"
+                fill="url(#p_inn)"
+                opacity=".89"
+                transform="rotate(330 100 233)"
+              />
+            </g>
+            <!-- inner -->
+            <path
+              d="M100 233 C96 226 94 218 95 210 C96 203 100 199 104 202 C108 205 107 215 104 225 Z"
+              fill="url(#p_inn)"
+              opacity=".96"
+              transform="rotate(20 100 233)"
+            />
+            <path
+              d="M100 233 C96 226 94 218 95 210 C96 203 100 199 104 202 C108 205 107 215 104 225 Z"
+              fill="url(#p_inn)"
+              opacity=".94"
+              transform="rotate(92 100 233)"
+            />
+            <path
+              d="M100 233 C96 226 94 218 95 210 C96 203 100 199 104 202 C108 205 107 215 104 225 Z"
+              fill="url(#p_inn)"
+              opacity=".96"
+              transform="rotate(164 100 233)"
+            />
+            <path
+              d="M100 233 C96 226 94 218 95 210 C96 203 100 199 104 202 C108 205 107 215 104 225 Z"
+              fill="url(#p_inn)"
+              opacity=".94"
+              transform="rotate(236 100 233)"
+            />
+            <path
+              d="M100 233 C96 226 94 218 95 210 C96 203 100 199 104 202 C108 205 107 215 104 225 Z"
+              fill="url(#p_inn)"
+              opacity=".92"
+              transform="rotate(308 100 233)"
+            />
+            <!-- center -->
+            <circle
+              cx="100"
+              cy="233"
+              r="12.5"
+              fill="url(#cdisk)"
+              stroke="#d06088"
+              stroke-width="1.2"
+              filter="url(#sg)"
+            />
+            <circle cx="100" cy="222" r="2.4" fill="url(#stam)" />
+            <circle cx="109" cy="225" r="2.2" fill="url(#stam)" />
+            <circle cx="112" cy="233" r="2.4" fill="url(#stam)" />
+            <circle cx="109" cy="241" r="2.2" fill="url(#stam)" />
+            <circle cx="100" cy="244" r="2.4" fill="url(#stam)" />
+            <circle cx="91" cy="241" r="2.2" fill="url(#stam)" />
+            <circle cx="88" cy="233" r="2.4" fill="url(#stam)" />
+            <circle cx="91" cy="225" r="2.2" fill="url(#stam)" />
+            <circle cx="100" cy="233" r="5.5" fill="#fff9cc" />
+            <circle cx="100" cy="233" r="2.5" fill="#ffee88" />
+          </g>
+
+          <!-- ╔══════════════════════════════════╗
+         ║  FLOWER: CENTER (biggest) cx=150 ║
+         ╚══════════════════════════════════╝ -->
+          <g class="pg" id="fcen" style="transform-origin: 150px 216px">
+            <!-- OUTER 8 -->
+            <g filter="url(#ds)">
+              <path
+                d="M150 216 C141 203 132 181 134 159 C136 142 150 133 164 142 C178 151 176 177 166 199 Z"
+                fill="url(#p_out)"
+                opacity=".93"
+              />
+              <path
+                d="M150 216 C141 203 132 181 134 159 C136 142 150 133 164 142 C178 151 176 177 166 199 Z"
+                fill="url(#p_out2)"
+                opacity=".89"
+                transform="rotate(45 150 216)"
+              />
+              <path
+                d="M150 216 C141 203 132 181 134 159 C136 142 150 133 164 142 C178 151 176 177 166 199 Z"
+                fill="url(#p_out)"
+                opacity=".87"
+                transform="rotate(90 150 216)"
+              />
+              <path
+                d="M150 216 C141 203 132 181 134 159 C136 142 150 133 164 142 C178 151 176 177 166 199 Z"
+                fill="url(#p_out2)"
+                opacity=".89"
+                transform="rotate(135 150 216)"
+              />
+              <path
+                d="M150 216 C141 203 132 181 134 159 C136 142 150 133 164 142 C178 151 176 177 166 199 Z"
+                fill="url(#p_out)"
+                opacity=".87"
+                transform="rotate(180 150 216)"
+              />
+              <path
+                d="M150 216 C141 203 132 181 134 159 C136 142 150 133 164 142 C178 151 176 177 166 199 Z"
+                fill="url(#p_out2)"
+                opacity=".85"
+                transform="rotate(225 150 216)"
+              />
+              <path
+                d="M150 216 C141 203 132 181 134 159 C136 142 150 133 164 142 C178 151 176 177 166 199 Z"
+                fill="url(#p_out)"
+                opacity=".87"
+                transform="rotate(270 150 216)"
+              />
+              <path
+                d="M150 216 C141 203 132 181 134 159 C136 142 150 133 164 142 C178 151 176 177 166 199 Z"
+                fill="url(#p_out2)"
+                opacity=".85"
+                transform="rotate(315 150 216)"
+              />
+            </g>
+            <!-- highlights on outer -->
+            <path
+              d="M150 216 C144 204 138 186 139 166 C141 150 150 142 158 148 C154 162 151 188 153 213 Z"
+              fill="url(#p_hi)"
+              opacity=".5"
+            />
+            <path
+              d="M150 216 C144 204 138 186 139 166 C141 150 150 142 158 148 C154 162 151 188 153 213 Z"
+              fill="url(#p_hi)"
+              opacity=".4"
+              transform="rotate(90 150 216)"
+            />
+            <path
+              d="M150 216 C144 204 138 186 139 166 C141 150 150 142 158 148 C154 162 151 188 153 213 Z"
+              fill="url(#p_hi)"
+              opacity=".4"
+              transform="rotate(180 150 216)"
+            />
+            <path
+              d="M150 216 C144 204 138 186 139 166 C141 150 150 142 158 148 C154 162 151 188 153 213 Z"
+              fill="url(#p_hi)"
+              opacity=".4"
+              transform="rotate(270 150 216)"
+            />
+            <!-- MID 8 petals, rotated 22.5° -->
+            <g filter="url(#ds)">
+              <path
+                d="M150 216 C143 205 136 187 138 169 C139 155 150 147 160 155 C170 163 168 185 160 205 Z"
+                fill="url(#p_mid)"
+                opacity=".94"
+                transform="rotate(22.5 150 216)"
+              />
+              <path
+                d="M150 216 C143 205 136 187 138 169 C139 155 150 147 160 155 C170 163 168 185 160 205 Z"
+                fill="url(#p_inn)"
+                opacity=".92"
+                transform="rotate(67.5 150 216)"
+              />
+              <path
+                d="M150 216 C143 205 136 187 138 169 C139 155 150 147 160 155 C170 163 168 185 160 205 Z"
+                fill="url(#p_mid)"
+                opacity=".94"
+                transform="rotate(112.5 150 216)"
+              />
+              <path
+                d="M150 216 C143 205 136 187 138 169 C139 155 150 147 160 155 C170 163 168 185 160 205 Z"
+                fill="url(#p_inn)"
+                opacity=".92"
+                transform="rotate(157.5 150 216)"
+              />
+              <path
+                d="M150 216 C143 205 136 187 138 169 C139 155 150 147 160 155 C170 163 168 185 160 205 Z"
+                fill="url(#p_mid)"
+                opacity=".90"
+                transform="rotate(202.5 150 216)"
+              />
+              <path
+                d="M150 216 C143 205 136 187 138 169 C139 155 150 147 160 155 C170 163 168 185 160 205 Z"
+                fill="url(#p_inn)"
+                opacity=".90"
+                transform="rotate(247.5 150 216)"
+              />
+              <path
+                d="M150 216 C143 205 136 187 138 169 C139 155 150 147 160 155 C170 163 168 185 160 205 Z"
+                fill="url(#p_mid)"
+                opacity=".90"
+                transform="rotate(292.5 150 216)"
+              />
+              <path
+                d="M150 216 C143 205 136 187 138 169 C139 155 150 147 160 155 C170 163 168 185 160 205 Z"
+                fill="url(#p_inn)"
+                opacity=".88"
+                transform="rotate(337.5 150 216)"
+              />
+            </g>
+            <!-- INNER 6 petals — tightest cup -->
+            <path
+              d="M150 216 C145 208 142 198 143 188 C144 180 150 176 156 180 C162 184 161 196 157 208 Z"
+              fill="url(#p_inn)"
+              opacity=".97"
+              transform="rotate(15 150 216)"
+            />
+            <path
+              d="M150 216 C145 208 142 198 143 188 C144 180 150 176 156 180 C162 184 161 196 157 208 Z"
+              fill="url(#p_inn)"
+              opacity=".95"
+              transform="rotate(75 150 216)"
+            />
+            <path
+              d="M150 216 C145 208 142 198 143 188 C144 180 150 176 156 180 C162 184 161 196 157 208 Z"
+              fill="url(#p_inn)"
+              opacity=".97"
+              transform="rotate(135 150 216)"
+            />
+            <path
+              d="M150 216 C145 208 142 198 143 188 C144 180 150 176 156 180 C162 184 161 196 157 208 Z"
+              fill="url(#p_inn)"
+              opacity=".95"
+              transform="rotate(195 150 216)"
+            />
+            <path
+              d="M150 216 C145 208 142 198 143 188 C144 180 150 176 156 180 C162 184 161 196 157 208 Z"
+              fill="url(#p_inn)"
+              opacity=".93"
+              transform="rotate(255 150 216)"
+            />
+            <path
+              d="M150 216 C145 208 142 198 143 188 C144 180 150 176 156 180 C162 184 161 196 157 208 Z"
+              fill="url(#p_inn)"
+              opacity=".93"
+              transform="rotate(315 150 216)"
+            />
+            <!-- CENTER -->
+            <circle
+              cx="150"
+              cy="216"
+              r="17"
+              fill="url(#cdisk)"
+              stroke="#cc5880"
+              stroke-width="1.5"
+              filter="url(#sg)"
+            />
+            <!-- stamen ring -->
+            <circle cx="150" cy="202" r="2.8" fill="url(#stam)" />
+            <circle cx="160" cy="205" r="2.6" fill="url(#stam)" />
+            <circle cx="165" cy="213" r="2.8" fill="url(#stam)" />
+            <circle cx="162" cy="222" r="2.6" fill="url(#stam)" />
+            <circle cx="153" cy="228" r="2.8" fill="url(#stam)" />
+            <circle cx="143" cy="228" r="2.6" fill="url(#stam)" />
+            <circle cx="136" cy="222" r="2.8" fill="url(#stam)" />
+            <circle cx="134" cy="213" r="2.6" fill="url(#stam)" />
+            <circle cx="140" cy="205" r="2.8" fill="url(#stam)" />
+            <circle
+              cx="150"
+              cy="216"
+              r="7.5"
+              fill="#fff9cc"
+              filter="url(#glow2)"
+            />
+            <circle cx="150" cy="216" r="4" fill="#ffee88" />
+            <circle cx="150" cy="216" r="1.8" fill="#fff5c0" />
+          </g>
+
+          <!-- ╔═══════════════════════════════╗
+         ║  FLOWER: RIGHT  cx=200 cy=233 ║
+         ╚═══════════════════════════════╝ -->
+          <g class="pg" id="fright" style="transform-origin: 200px 233px">
+            <g filter="url(#ds)">
+              <path
+                d="M200 233 C193 223 186 206 188 188 C190 174 200 167 210 174 C220 181 219 202 212 220 Z"
+                fill="url(#p_out2)"
+                opacity=".92"
+              />
+              <path
+                d="M200 233 C193 223 186 206 188 188 C190 174 200 167 210 174 C220 181 219 202 212 220 Z"
+                fill="url(#p_out)"
+                opacity=".88"
+                transform="rotate(60 200 233)"
+              />
+              <path
+                d="M200 233 C193 223 186 206 188 188 C190 174 200 167 210 174 C220 181 219 202 212 220 Z"
+                fill="url(#p_out2)"
+                opacity=".86"
+                transform="rotate(120 200 233)"
+              />
+              <path
+                d="M200 233 C193 223 186 206 188 188 C190 174 200 167 210 174 C220 181 219 202 212 220 Z"
+                fill="url(#p_out)"
+                opacity=".88"
+                transform="rotate(180 200 233)"
+              />
+              <path
+                d="M200 233 C193 223 186 206 188 188 C190 174 200 167 210 174 C220 181 219 202 212 220 Z"
+                fill="url(#p_out2)"
+                opacity=".84"
+                transform="rotate(240 200 233)"
+              />
+              <path
+                d="M200 233 C193 223 186 206 188 188 C190 174 200 167 210 174 C220 181 219 202 212 220 Z"
+                fill="url(#p_out)"
+                opacity=".82"
+                transform="rotate(300 200 233)"
+              />
+            </g>
+            <path
+              d="M200 233 C195 224 191 210 192 195 C194 183 200 177 206 182 C202 194 200 214 202 230 Z"
+              fill="url(#p_hi)"
+              opacity=".55"
+            />
+            <g filter="url(#ds)">
+              <path
+                d="M200 233 C194 225 189 212 190 198 C192 186 200 180 207 186 C214 192 213 210 208 224 Z"
+                fill="url(#p_inn)"
+                opacity=".93"
+                transform="rotate(30 200 233)"
+              />
+              <path
+                d="M200 233 C194 225 189 212 190 198 C192 186 200 180 207 186 C214 192 213 210 208 224 Z"
+                fill="url(#p_mid)"
+                opacity=".91"
+                transform="rotate(90 200 233)"
+              />
+              <path
+                d="M200 233 C194 225 189 212 190 198 C192 186 200 180 207 186 C214 192 213 210 208 224 Z"
+                fill="url(#p_inn)"
+                opacity=".93"
+                transform="rotate(150 200 233)"
+              />
+              <path
+                d="M200 233 C194 225 189 212 190 198 C192 186 200 180 207 186 C214 192 213 210 208 224 Z"
+                fill="url(#p_mid)"
+                opacity=".91"
+                transform="rotate(210 200 233)"
+              />
+              <path
+                d="M200 233 C194 225 189 212 190 198 C192 186 200 180 207 186 C214 192 213 210 208 224 Z"
+                fill="url(#p_inn)"
+                opacity=".89"
+                transform="rotate(270 200 233)"
+              />
+              <path
+                d="M200 233 C194 225 189 212 190 198 C192 186 200 180 207 186 C214 192 213 210 208 224 Z"
+                fill="url(#p_mid)"
+                opacity=".89"
+                transform="rotate(330 200 233)"
+              />
+            </g>
+            <path
+              d="M200 233 C196 226 194 218 195 210 C196 203 200 199 204 202 C208 205 207 215 204 225 Z"
+              fill="url(#p_inn)"
+              opacity=".96"
+              transform="rotate(20 200 233)"
+            />
+            <path
+              d="M200 233 C196 226 194 218 195 210 C196 203 200 199 204 202 C208 205 207 215 204 225 Z"
+              fill="url(#p_inn)"
+              opacity=".94"
+              transform="rotate(92 200 233)"
+            />
+            <path
+              d="M200 233 C196 226 194 218 195 210 C196 203 200 199 204 202 C208 205 207 215 204 225 Z"
+              fill="url(#p_inn)"
+              opacity=".96"
+              transform="rotate(164 200 233)"
+            />
+            <path
+              d="M200 233 C196 226 194 218 195 210 C196 203 200 199 204 202 C208 205 207 215 204 225 Z"
+              fill="url(#p_inn)"
+              opacity=".94"
+              transform="rotate(236 200 233)"
+            />
+            <path
+              d="M200 233 C196 226 194 218 195 210 C196 203 200 199 204 202 C208 205 207 215 204 225 Z"
+              fill="url(#p_inn)"
+              opacity=".92"
+              transform="rotate(308 200 233)"
+            />
+            <circle
+              cx="200"
+              cy="233"
+              r="12.5"
+              fill="url(#cdisk)"
+              stroke="#d06088"
+              stroke-width="1.2"
+              filter="url(#sg)"
+            />
+            <circle cx="200" cy="222" r="2.4" fill="url(#stam)" />
+            <circle cx="209" cy="225" r="2.2" fill="url(#stam)" />
+            <circle cx="212" cy="233" r="2.4" fill="url(#stam)" />
+            <circle cx="209" cy="241" r="2.2" fill="url(#stam)" />
+            <circle cx="200" cy="244" r="2.4" fill="url(#stam)" />
+            <circle cx="191" cy="241" r="2.2" fill="url(#stam)" />
+            <circle cx="188" cy="233" r="2.4" fill="url(#stam)" />
+            <circle cx="191" cy="225" r="2.2" fill="url(#stam)" />
+            <circle cx="200" cy="233" r="5.5" fill="#fff9cc" />
+            <circle cx="200" cy="233" r="2.5" fill="#ffee88" />
+          </g>
+
+          <!-- ╔══════════════════════════════════╗
+         ║  FLOWER: FAR RIGHT  cx=228 cy=250║
+         ╚══════════════════════════════════╝ -->
+          <g class="pg" id="ffright" style="transform-origin: 228px 250px">
+            <g filter="url(#ds)">
+              <path
+                d="M228 250 C221 240 215 226 216 210 C218 198 228 192 236 198 C244 204 243 222 236 238 Z"
+                fill="url(#p_out)"
+                opacity=".90"
+              />
+              <path
+                d="M228 250 C221 240 215 226 216 210 C218 198 228 192 236 198 C244 204 243 222 236 238 Z"
+                fill="url(#p_out2)"
+                opacity=".86"
+                transform="rotate(60 228 250)"
+              />
+              <path
+                d="M228 250 C221 240 215 226 216 210 C218 198 228 192 236 198 C244 204 243 222 236 238 Z"
+                fill="url(#p_out)"
+                opacity=".84"
+                transform="rotate(120 228 250)"
+              />
+              <path
+                d="M228 250 C221 240 215 226 216 210 C218 198 228 192 236 198 C244 204 243 222 236 238 Z"
+                fill="url(#p_out2)"
+                opacity=".86"
+                transform="rotate(180 228 250)"
+              />
+              <path
+                d="M228 250 C221 240 215 226 216 210 C218 198 228 192 236 198 C244 204 243 222 236 238 Z"
+                fill="url(#p_out)"
+                opacity=".84"
+                transform="rotate(240 228 250)"
+              />
+              <path
+                d="M228 250 C221 240 215 226 216 210 C218 198 228 192 236 198 C244 204 243 222 236 238 Z"
+                fill="url(#p_out2)"
+                opacity=".82"
+                transform="rotate(300 228 250)"
+              />
+            </g>
+            <path
+              d="M228 250 C224 243 220 232 221 218 C222 208 228 202 234 207 C230 218 228 236 230 248 Z"
+              fill="url(#p_hi)"
+              opacity=".5"
+            />
+            <g filter="url(#ds)">
+              <path
+                d="M228 250 C222 242 218 231 219 218 C221 208 228 202 234 208 C240 214 239 230 234 244 Z"
+                fill="url(#p_mid)"
+                opacity=".93"
+                transform="rotate(30 228 250)"
+              />
+              <path
+                d="M228 250 C222 242 218 231 219 218 C221 208 228 202 234 208 C240 214 239 230 234 244 Z"
+                fill="url(#p_inn)"
+                opacity=".91"
+                transform="rotate(90 228 250)"
+              />
+              <path
+                d="M228 250 C222 242 218 231 219 218 C221 208 228 202 234 208 C240 214 239 230 234 244 Z"
+                fill="url(#p_mid)"
+                opacity=".93"
+                transform="rotate(150 228 250)"
+              />
+              <path
+                d="M228 250 C222 242 218 231 219 218 C221 208 228 202 234 208 C240 214 239 230 234 244 Z"
+                fill="url(#p_inn)"
+                opacity=".91"
+                transform="rotate(210 228 250)"
+              />
+              <path
+                d="M228 250 C222 242 218 231 219 218 C221 208 228 202 234 208 C240 214 239 230 234 244 Z"
+                fill="url(#p_mid)"
+                opacity=".89"
+                transform="rotate(270 228 250)"
+              />
+              <path
+                d="M228 250 C222 242 218 231 219 218 C221 208 228 202 234 208 C240 214 239 230 234 244 Z"
+                fill="url(#p_inn)"
+                opacity=".89"
+                transform="rotate(330 228 250)"
+              />
+            </g>
+            <path
+              d="M228 250 C224 244 222 236 223 228 C224 222 228 218 232 221 C235 224 235 234 232 244 Z"
+              fill="url(#p_inn)"
+              opacity=".96"
+              transform="rotate(18 228 250)"
+            />
+            <path
+              d="M228 250 C224 244 222 236 223 228 C224 222 228 218 232 221 C235 224 235 234 232 244 Z"
+              fill="url(#p_inn)"
+              opacity=".94"
+              transform="rotate(90 228 250)"
+            />
+            <path
+              d="M228 250 C224 244 222 236 223 228 C224 222 228 218 232 221 C235 224 235 234 232 244 Z"
+              fill="url(#p_inn)"
+              opacity=".96"
+              transform="rotate(162 228 250)"
+            />
+            <path
+              d="M228 250 C224 244 222 236 223 228 C224 222 228 218 232 221 C235 224 235 234 232 244 Z"
+              fill="url(#p_inn)"
+              opacity=".94"
+              transform="rotate(234 228 250)"
+            />
+            <path
+              d="M228 250 C224 244 222 236 223 228 C224 222 228 218 232 221 C235 224 235 234 232 244 Z"
+              fill="url(#p_inn)"
+              opacity=".92"
+              transform="rotate(306 228 250)"
+            />
+            <circle
+              cx="228"
+              cy="250"
+              r="9.5"
+              fill="url(#cdisk)"
+              stroke="#d06088"
+              stroke-width="1"
+              filter="url(#sg)"
+            />
+            <circle cx="228" cy="242" r="2" fill="url(#stam)" />
+            <circle cx="234" cy="244" r="1.8" fill="url(#stam)" />
+            <circle cx="236" cy="250" r="2" fill="url(#stam)" />
+            <circle cx="234" cy="256" r="1.8" fill="url(#stam)" />
+            <circle cx="228" cy="258" r="2" fill="url(#stam)" />
+            <circle cx="222" cy="256" r="1.8" fill="url(#stam)" />
+            <circle cx="220" cy="250" r="2" fill="url(#stam)" />
+            <circle cx="222" cy="244" r="1.8" fill="url(#stam)" />
+            <circle cx="228" cy="250" r="4" fill="#fff9cc" />
+          </g>
+
+          <!-- ══ RIBBON ══ -->
+          <g class="rb" id="rbow">
+            <rect
+              x="116"
+              y="356"
+              width="68"
+              height="26"
+              rx="5"
+              fill="url(#rib)"
+              opacity=".96"
+            />
+            <ellipse
+              cx="128"
+              cy="352"
+              rx="20"
+              ry="13"
+              fill="#e8a818"
+              transform="rotate(-18 128 352)"
+              opacity=".9"
+            />
+            <ellipse
+              cx="172"
+              cy="352"
+              rx="20"
+              ry="13"
+              fill="#e8a818"
+              transform="rotate(18 172 352)"
+              opacity=".9"
+            />
+            <ellipse
+              cx="128"
+              cy="352"
+              rx="12"
+              ry="8"
+              fill="#ffe050"
+              transform="rotate(-18 128 352)"
+            />
+            <ellipse
+              cx="172"
+              cy="352"
+              rx="12"
+              ry="8"
+              fill="#ffe050"
+              transform="rotate(18 172 352)"
+            />
+            <ellipse
+              cx="150"
+              cy="354"
+              rx="11"
+              ry="10"
+              fill="#e8a818"
+              stroke="#c08800"
+              stroke-width="1"
+            />
+            <ellipse cx="150" cy="354" rx="6" ry="5.5" fill="#ffe050" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="tt" id="tt">
+        <div class="trow" id="trow"></div>
+      </div>
+    </div>
+
+    <script>
+      // Stars
+      for (var i = 0; i < 120; i++) {
+        var s = document.createElement("div");
+        s.className = "star";
+        var sz = Math.random() * 2.2 + 0.4;
+        s.style.cssText =
+          "width:" +
+          sz +
+          "px;height:" +
+          sz +
+          "px;top:" +
+          Math.random() * 100 +
+          "%;left:" +
+          Math.random() * 100 +
+          "%;--d:" +
+          (Math.random() * 3 + 2).toFixed(1) +
+          "s;--dl:-" +
+          (Math.random() * 5).toFixed(1) +
+          "s;";
+        document.body.appendChild(s);
+      }
+
+      // Text
+
+      // Intro
+      [
+        { id: "il1", d: 300 },
+        { id: "il2", d: 900 },
+        { id: "il3", d: 1400 },
+        { id: "il4", d: 1900 },
+      ].forEach(function (x) {
+        setTimeout(function () {
+          document.getElementById(x.id).classList.add("show");
+        }, x.d);
+      });
+      setTimeout(function () {
+        document.getElementById("intro").classList.add("fadeout");
+        setTimeout(function () {
+          document.getElementById("intro").style.display = "none";
+          document.getElementById("scene").classList.add("show");
+          setTimeout(bloom, 200);
+        }, 850);
+      }, 3500);
+
+      function bloom() {
+        ["s0", "s1", "s2", "s3", "s4"].forEach(function (id, i) {
+          setTimeout(function () {
+            document.getElementById(id).classList.add("grow");
+          }, i * 100);
+        });
+        setTimeout(function () {
+          document.getElementById("kw").classList.add("show");
+        }, 180);
+        ["ll1", "ll2", "ll3", "ll4"].forEach(function (id, i) {
+          setTimeout(
+            function () {
+              document.getElementById(id).classList.add("show");
+            },
+            520 + i * 140,
+          );
+        });
+        [
+          { id: "ffl", d: 720 },
+          { id: "ffright", d: 880 },
+          { id: "fleft", d: 1120 },
+          { id: "fright", d: 1280 },
+          { id: "fcen", d: 1640 },
+        ].forEach(function (o) {
+          setTimeout(function () {
+            document.getElementById(o.id).classList.add("open");
+          }, o.d);
+        });
+        setTimeout(function () {
+          document.getElementById("rbow").classList.add("show");
+        }, 2080);
+        setTimeout(function () {
+          document.getElementById("tt").classList.add("visible");
+        }, 2460);
+        setTimeout(startFalling, 2650);
+      }
+
+      var emojis = ["🌸", "🌺", "🌷", "🌹"];
+      function dropPetal() {
+        var el = document.createElement("div");
+        el.className = "fp";
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        var dur = Math.random() * 4 + 5;
+        el.style.cssText =
+          "left:" +
+          Math.random() * 100 +
+          "vw;top:-28px;animation-duration:" +
+          dur +
+          "s;font-size:" +
+          (Math.random() * 0.8 + 0.75) +
+          "rem;";
+        document.body.appendChild(el);
+        setTimeout(
+          function () {
+            if (el.parentNode) el.parentNode.removeChild(el);
+          },
+          (dur + 1) * 1000,
+        );
+      }
+      function startFalling() {
+        for (var i = 0; i < 8; i++) setTimeout(dropPetal, i * 280);
+        setInterval(dropPetal, 1400);
+      }
+    </script>
+  </body>
+</html>
