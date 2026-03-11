@@ -318,6 +318,35 @@
           transform: translateY(110vh) rotate(560deg);
         }
       }
+      .text {
+        color: #ffb1d8;
+        font-size: 24px;
+        margin-top: 30px;
+        opacity: 0;
+        animation: showText 2s ease forwards 2s;
+      }
+
+      @keyframes showText {
+        to {
+          opacity: 1;
+        }
+      }
+      .fp {
+        position: fixed;
+        pointer-events: none;
+        animation: fall linear forwards;
+        opacity: 0;
+      }
+      @keyframes fall {
+        0% {
+          opacity: 1;
+          transform: translateY(0) rotate(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(110vh) rotate(560deg);
+        }
+      }
     </style>
   </head>
   <body>
@@ -1493,6 +1522,7 @@
       <div class="tt" id="tt">
         <div class="trow" id="trow"></div>
       </div>
+      <div class="text">I love you my dear</div>
     </div>
 
     <script>
