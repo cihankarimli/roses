@@ -320,10 +320,13 @@
       }
       .text {
         color: #ffb1d8;
-        font-size: 24px;
+        font-size: 34px;
         margin-top: 30px;
         opacity: 0;
-        animation: showText 2s ease forwards 2s;
+        text-shadow:
+          0 0 28px rgba(255, 120, 180, 0.7),
+          0 0 55px rgba(200, 0, 100, 0.3);
+        animation: showText 2s ease forwards;
       }
 
       @keyframes showText {
